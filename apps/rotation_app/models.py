@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import urllib, urllib.request, ssl
+
 from django.db import models
 from django.contrib import messages
 from apps.login_registration.models import User
@@ -17,11 +19,18 @@ class ClothingManager(models.Manager):
             messages.error(newrequest, u"Name cannot be blank", extra_tags="name")
             bFlashMessage = True  
 
-        # Quote Text - Required; Can't be blank
+        # Image URL - Required; Can't be blank
         if len(imageURL) < 1:
             messages.error(newrequest, u"Image URL cannot be blank", extra_tags="imageurl")
             bFlashMessage = True  
-        
+
+        # Image URL must be publically visible and have a content type of image
+        ssl._create_default_https_context = ssl._create_unverified_context
+        r = urllib.request.urlopen(imageURL)
+        if (r.headers.get_content_maintype() != 'image'):
+            messages.error(newrequest, u"Image URL must be public and valid and resolve to content type of image", extra_tags="imageurl")
+            bFlashMessage = True          
+
         return bFlashMessage
 
 class Top(models.Model):

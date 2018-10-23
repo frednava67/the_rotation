@@ -17,6 +17,18 @@ def index(request):
     if "user_id" not in request.session:
         return redirect("/login_registration")
 
-    return render(request, "home.html")
+    logged_in_user_id = request.session['user_id']
+    
+    user = User.objects.get(id=logged_in_user_id)
+    tops = Top.objects.all().filter(top_added_by_id=int(logged_in_user_id))
+    bottoms = Bottom.objects.all().filter(bottom_added_by_id=int(logged_in_user_id))
+
+    context = {
+        "user": user,
+        "tops": tops,
+        "bottoms": bottoms,
+    }
+
+    return render(request, "home.html", context)
 
     
