@@ -23,22 +23,29 @@
 
         <div class="row">
             <div class="col-sm blackborder">
-                One of three columns
                 {% for top in tops %}
-                {{ top.name }}<br> 
-                <img src="{{ top.imageURL }}" width="128" height="128"><br>
-                <br>
+                    {{ top.name }}<br> 
+                    <img src="{{ top.imageURL }}" width="128" height="128"><br>
+                    <br>
                 {% endfor %}
             </div>
             <div class="col-sm blackborder">
                 {% for bottom in bottoms %}
-                {{ bottom.name }}<br>
-                <img src="{{ bottom.imageURL }}" width="128" height="128"><br>
-                <br>
+                    {{ bottom.name }}<br>
+                    <img src="{{ bottom.imageURL }}" width="128" height="128"><br>
+                    <br>
                 {% endfor %}
             </div>
             <div class="col-sm blackborder">
-                Three of three columns
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-interval=false data-keyboard=true>
+                    <div class="carousel-inner">
+                        {% for top in tops %}
+                            <div class="carousel-item{% if forloop.counter == 1 %} active{% endif %}">
+                                <img class="d-block w-100" src="{{ top.imageURL }}" alt="{{ top.name }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
         <br>
