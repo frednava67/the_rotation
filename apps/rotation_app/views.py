@@ -31,8 +31,8 @@ def index(request):
     }
     # if request.user_agent.is_mobile:
         # pageToRender = 'mhome.html'
-    else:
-        pageToRender = 'home.html'
+    #else:
+    pageToRender = 'home.html'
     return render(request, pageToRender, context)
 
     
