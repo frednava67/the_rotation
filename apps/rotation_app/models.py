@@ -1,3 +1,59 @@
-from django.db import models
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
-# Create your models here.
+from django.db import models
+from django.contrib import messages
+from apps.login_registration.models import User
+
+class ClothingManager(models.Manager):
+    def basic_validator(self, newrequest):
+        bFlashMessage = False
+
+        name = newrequest.POST['name']
+        imageURL = newrequest.POST['imageURL']
+
+        # Name - Required; Can't be blank
+        if len(name) < 1:
+            messages.error(newrequest, u"Name cannot be blank", extra_tags="name")
+            bFlashMessage = True  
+
+        # Quote Text - Required; Can't be blank
+        if len(imageURL) < 1:
+            messages.error(newrequest, u"Image URL cannot be blank", extra_tags="imageurl")
+            bFlashMessage = True  
+        
+        return bFlashMessage
+
+class Top(models.Model):
+    name = models.CharField(max_length=255)
+    imageURL = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+    #relationships
+    top_added_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="combo_top_added_by")
+    objects = ClothingManager()
+
+class Bottom(models.Model):
+    name = models.CharField(max_length=255)
+    imageURL = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+    # relationships
+    bottom_added_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="combo_bottom_added_by")
+    objects = ClothingManager()   
+
+class Combo(models.Model):
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+    # relationships
+    top_chosen = models.ForeignKey(Top, null=True, on_delete=models.SET_NULL, related_name="combo_top")
+    bottom_chosen = models.ForeignKey(Bottom, null=True, on_delete=models.SET_NULL, related_name="combo_bottom")    
+    created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="combo_by")  
+
+class Schedule(models.Model):
+    date_scheduled = models.DateTimeField(auto_now_add = True)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+    # relationships
+    combo_chosen = models.ForeignKey(Top, null=True, on_delete=models.SET_NULL, related_name="chosen_combo")
+    scheduled_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="combo_scheduled_by")    
