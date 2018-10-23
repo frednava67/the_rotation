@@ -1,5 +1,5 @@
-.vscode
-venv
+.vscode/
+venv/
 __pycache__
 .DS_Store
 apps/.DS_Store
