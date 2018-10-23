@@ -4,3 +4,4 @@ __pycache__
 .DS_Store
 apps/.DS_Store
 apps/login_registration/.DS_Store
+db.sqlite3

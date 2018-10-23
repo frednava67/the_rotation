@@ -14,6 +14,7 @@ NAME_REGEX  = re.compile('[0-9]')
 def index(request):
     print("index()")
 
+
     if "user_id" not in request.session:
         return redirect("/login_registration")
 
@@ -28,7 +29,10 @@ def index(request):
         "tops": tops,
         "bottoms": bottoms,
     }
-
-    return render(request, "home.html", context)
+    # if request.user_agent.is_mobile:
+        # pageToRender = 'mhome.html'
+    else:
+        pageToRender = 'home.html'
+    return render(request, pageToRender, context)
 
     
