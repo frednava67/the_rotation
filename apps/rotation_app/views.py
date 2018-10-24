@@ -16,8 +16,6 @@ def getScheduledCombo(user_id):
         return False
     else:
         return retObj
-        
-
 
 
 
@@ -47,4 +45,72 @@ def index(request):
         pageToRender = 'home.html'
     return render(request, pageToRender, context)
 
-    
+def show_add_top(request):
+    print("show_add_top()")
+
+    logged_in_user_id = request.session['user_id']
+    user = User.objects.get(id=logged_in_user_id)
+
+    context = {
+        "user": user,
+    }
+
+    return render(request, "addtop.html", context)
+
+def show_add_bottom(request):
+    print("show_add_bottom()")
+
+    logged_in_user_id = request.session['user_id']
+    user = User.objects.get(id=logged_in_user_id)
+
+    context = {
+        "user": user,
+    }
+
+    return render(request, "addbottom.html", context)    
+
+def process_add_top(request):
+    print("process_add_top()")
+
+    if request.method == "POST":
+        bFlashMessage = Top.objects.basic_validator(request)
+
+        if bFlashMessage:
+            return redirect("/add_top")
+        
+        print(request.POST['userid'])
+        print(request.POST['textName'])
+        print(request.POST['textImageURL'])  
+
+        name_to_add = request.POST['textName']
+        url_to_add = request.POST['textImageURL']
+        user_id_adding = request.POST['userid']
+
+        Top.objects.create(name=name_to_add, imageURL=url_to_add, top_added_by_id=user_id_adding)
+
+    return redirect('/')
+
+def process_add_bottom(request):
+    print("process_add_top()")
+
+    if request.method == "POST":
+        bFlashMessage = Bottom.objects.basic_validator(request)
+
+        if bFlashMessage:
+            return redirect("/add_bottom")
+        
+        print(request.POST['userid'])
+        print(request.POST['textName'])
+        print(request.POST['textImageURL'])  
+
+        name_to_add = request.POST['textName']
+        url_to_add = request.POST['textImageURL']
+        user_id_adding = request.POST['userid']
+
+        Bottom.objects.create(name=name_to_add, imageURL=url_to_add, top_added_by_id=user_id_adding)
+
+    return redirect('/')
+
+def logoff(request):
+    print("logoff()")
+    return redirect('/login_registration/logoff')

@@ -1,0 +1,82 @@
+body {
+    background-color: antiquewhite;
+}
+
+.blackborder{
+    border: 1px solid black;
+
+}
+
+.form-fixer {
+    padding-left: 0px;
+}
+
+.headspace {
+    margin-top: 30px;
+}
+
+.styledheader {
+    background-image: linear-gradient(gray, antiquewhite);
+    margin-top: 15px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    font-size: 26px;
+}
+
+.formheader {
+    margin-top: 5px;
+    padding-bottom: 20px;
+    font-size: 26px;
+}
+
+.styleddiv {
+    margin-top: 5px;
+    padding-top: 20px;
+    padding-left: 50px;
+    border: 2px solid black;
+    border-radius: 3px;
+    box-shadow: 5px 10px 18px #888888;
+    background-color: cornsilk;
+}
+
+form {
+    margin-top: 10px;
+}
+
+.padleftzero {
+    padding-left: 0px;
+}
+
+.tablediv {
+    display: inline-block;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-left: -1px;
+}
+
+.blackborder {
+    border: 1px solid black;
+}
+
+.blackborder-right {
+    border-right: 1px solid black;
+}
+
+.blackborder-bottom {
+    border-bottom: 1px solid black;
+}
+
+.darkgraybg {
+    background-color: darkgray;
+}
+
+.graybg {
+    background-color: lightgray;
+}
+
+.formflash {
+    height: 15px;
+    margin-left: 10px;
+    color: red;
+    font-size: 12px;
+}

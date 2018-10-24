@@ -3,5 +3,10 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index),    
-    url(r'^home$', views.index), # or whatever is needed
+    url(r'^home$', views.index),
+    url(r'^add_top$', views.show_add_top),
+    url(r'^add_bottom$', views.show_add_bottom),    
+    url(r'^process_add_top$', views.process_add_top),
+    url(r'^process_add_bottom$', views.process_add_bottom),    
+    url(r'^logoff$', views.logoff),
 ]
