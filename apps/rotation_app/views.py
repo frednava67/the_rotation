@@ -29,10 +29,10 @@ def index(request):
         "tops": tops,
         "bottoms": bottoms,
     }
-    # if request.user_agent.is_mobile:
-        # pageToRender = 'mhome.html'
-    #else:
-    pageToRender = 'home.html'
+    if request.user_agent.is_mobile:
+        pageToRender = 'mhome.html'
+    else:
+        pageToRender = 'home.html'
     return render(request, pageToRender, context)
 
     
