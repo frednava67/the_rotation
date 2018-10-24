@@ -1,0 +1,59 @@
+@media screen and (min-width: 1024px) {
+    #d1{
+        height:250px;
+    }
+}      
+
+@media screen and (max-width: 800px) {
+    #d1{
+        height:150px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #d1{
+        height:100px;
+    }
+}
+
+.blackborder{
+    border: 1px solid black;
+
+}
+
+img {
+    width: auto;
+}
+
+.padleftzero {
+    padding-left: 0px;
+}
+
+.fixedimgsize {
+    height: 400px;
+    width: 300px;
+}
+
+.margintop {
+    margin-top: 50px;
+}
+
+.blackborder {
+    border: 1px solid black;
+}
+
+.blackborder-right {
+    border-right: 1px solid black;
+}
+
+.blackborder-bottom {
+    border-bottom: 1px solid black;
+}
+
+.darkgraybg {
+    background-color: darkgray;
+}
+
+.graybg {
+    background-color: lightgray;
+}
