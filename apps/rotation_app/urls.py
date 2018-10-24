@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^add_bottom$', views.show_add_bottom),    
     url(r'^create_combo$', views.show_combomaker),        
     url(r'^process_add_top$', views.process_add_top),
-    url(r'^process_add_bottom$', views.process_add_bottom),    
+    url(r'^process_add_bottom$', views.process_add_bottom),
+    url(r'^edit_top$', views.edit_top),
     url(r'^logoff$', views.logoff),
 ]

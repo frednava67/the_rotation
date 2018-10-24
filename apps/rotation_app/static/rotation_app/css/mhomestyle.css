@@ -83,5 +83,15 @@ img {
 }
 
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+.buttons{
+    text-align: center;
+}
+.button a{
+    display: inline-block;
+    width: 75%;
+    height: 2%;
+    margin: 10px 0px;
+}
