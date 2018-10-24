@@ -60,7 +60,7 @@ class Combo(models.Model):
     created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="combo_by")  
 
 class Schedule(models.Model):
-    date_scheduled = models.DateTimeField(auto_now_add = True)
+    date_scheduled = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     # relationships
