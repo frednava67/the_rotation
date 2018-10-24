@@ -115,10 +115,12 @@ def show_combomaker(request):
     print("show_combomaker()")
     logged_in_user_id = request.session['user_id']
 
+    user = User.objects.get(id=logged_in_user_id)
     user_tops = Top.objects.filter(top_added_by_id=logged_in_user_id).all()
     user_bottoms = Bottom.objects.filter(bottom_added_by_id=logged_in_user_id).all()
 
     context = {
+        "user":  user,
         "tops": user_tops,
         "bottoms": user_bottoms,
     }

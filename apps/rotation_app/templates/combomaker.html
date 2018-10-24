@@ -10,42 +10,77 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.4.1/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.4.1/slick-theme.css"/>
-        
     {% load static %}
-    <link rel="stylesheet" href="{% static 'rotation_app/css/combomaker.css' %}">
+    <link rel="stylesheet" href="{% static 'rotation_app/css/homestyle.css' %}">
 
-
-    <title>The Rotation</title>
+    <title>The Rotation - Combo Maker</title>
 </head>
 
 <body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/">Home</a>
+        <a href="add_top">Add A Top</a>
+        <a href="add_bottom">Add A Bottom</a>
+        <a href="logoff">Logout</a>
+    </div>
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+    <div class="row d-flex justify-content-center">
+        <h4>Combo Maker for {{ user }}</h4>
+    </div>
     <div class="container">
         <div class="row d-flex justify-content-center margintop">
-            <div id="topChoice" class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 blackborder graybg">
-                <div id="playlist1">
-                    {% for top in tops %}
-                        <div class="slick">
-                            <img class="d-block w-100 fixedimgsize" src="{{ top.imageURL }}" alt="{{ top.name }}">
+            <div id="topChoice" class="col-lg-4 blackborder graybg">
+                <div id="carouselTops" class="carousel slide" data-ride="carousel" data-interval=false>
+                    <div class="carousel-inner">
+                        {% for top in tops %}
+                        <div class="carousel-item{% if forloop.counter == 1 %} active{% endif %}">
+                            <img id="ctops_item{{ forloop.counter }}" class="d-block w-100 fixedimgsize" src="{{ top.imageURL }}" alt="{{ top.name }}" data_top_id="{{ top.id }}">
                         </div>
-                    {% endfor %}
-                </div>    
-            </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselTops" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselTops" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>    
+                </div>
+            </div>    
         </div>
-        <br>
         <div class="row d-flex justify-content-center">
-            <div  id="bottomChoice" class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 blackborder graybg">
-                <div id="playlist2">
-                    {% for bottom in bottoms %}
-                        <div class="slick">
-                            <img class="d-block w-100 fixedimgsize" src="{{ bottom.imageURL }}" alt="{{ bottom.name }}">
+            <div  id="bottomChoice" class="col-lg-4 blackborder graybg">
+                <div id="carouselBottoms" class="carousel slide" data-ride="carousel" data-interval=false>
+                    <div class="carousel-inner">
+                        {% for bottom in bottoms %}
+                        <div class="carousel-item{% if forloop.counter == 1 %} active{% endif %}">
+                            <img id="cbottoms_item{{ forloop.counter }}" class="d-block w-100 fixedimgsize" src="{{ bottom.imageURL }}" alt="{{ bottom.name }}" data_bottom_id="{{ bottom.id }}">
                         </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselBottoms" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselBottoms" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>    
                 </div>
             </div>
         </div>
+        <div class="comboform">
+            <form action="process_combo" method="POST">
+            {% csrf_token %}
+                <input id="currentTopID" type="hidden" name="currentTopID">
+                <input id="currentBottomID" type="hidden" name="currentBottomID">                
+            </form>
+        </div>                
     </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js"></script>
@@ -57,9 +92,57 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 
-    <script src="//cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js"></script>
-    <script src="{% static 'rotation_app/js/combos.js' %}"></script>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+        
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
 
-</body>
+        $(document).ready(function(){
+            console.log("PAGE LOADED");
+            console.log("Active Top: ", document.getElementById("ctops_item1").getAttribute("data_top_id"));
+            console.log("Active Bottom: ", document.getElementById("cbottoms_item1").getAttribute("data_bottom_id"));  
+            data_top_id = document.getElementById("ctops_item1").getAttribute("data_top_id");
+            data_bottom_id = document.getElementById("cbottoms_item1").getAttribute("data_bottom_id");
+            document.getElementById("currentTopID").setAttribute("value", data_top_id);
+            document.getElementById("currentBottomID").setAttribute("value", data_bottom_id);            
+        });
 
+        $(".carousel").on("touchstart", function(event){
+            var xClick = event.originalEvent.touches[0].pageX;
+            $(this).one("touchmove", function(event){
+                var xMove = event.originalEvent.touches[0].pageX;
+                if( Math.floor(xClick - xMove) > 5 ){
+                    $(this).carousel('next');
+                }
+                else if( Math.floor(xClick - xMove) < -5 ){
+                    $(this).carousel('prev');
+                }
+            });
+            $(".carousel").on("touchend", function(){
+                    $(this).off("touchmove");
+            });
+        });      
+
+        $('#carouselTops').on('slid.bs.carousel', function (event) {
+            console.log("TOPS SLIDE COMPLETED");
+            console.log("ctops_item" + String(event.to + 1));
+            console.log(document.getElementById("ctops_item" + String(event.to + 1)).getAttribute("data_top_id"));
+            data_top_id = document.getElementById("ctops_item1").getAttribute("data_top_id");
+            document.getElementById("currentTopID").setAttribute("value", data_top_id);
+        });
+
+        $('#carouselBottoms').on('slid.bs.carousel', function (event) {
+            console.log("BOTTOMS SLIDE COMPLETED");            
+            console.log("cbottoms_item" + String(event.to + 1));
+            console.log(document.getElementById("cbottoms_item" + String(event.to + 1)).getAttribute("data_bottom_id"));   
+            data_bottom_id = document.getElementById("cbottoms_item1").getAttribute("data_bottom_id");
+            document.getElementById("currentBottomID").setAttribute("value", data_bottom_id);   
+        });
+
+    </script>
+    </body>
 </html>

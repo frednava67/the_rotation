@@ -1,31 +1,16 @@
-img {
+/* .slickdiv.img {
     object-fit: contain;
     max-width: 100%;
     max-height: 100%;
     width: 100px;
     height: 300px;
+} */
+
+.slickdiv {
+    width: 200px;
+    height: 300px;
 }
 
-#playlist1 {
-    background:grey;    
-    width:100%;
-}
-
-#playlist2 {
-    background:darkgray;    
-    width:100%;
-}
-
-.slick {
-    background:antiquewhite;
-    color:white;
-    text-align:center;
-    border-right:1px solid white;
-}
-
-.slick-active {
-    background:antiquewhite;
-}
-.slick-center {
-    background:white;
+.slick-slide {
+    width: 100%;
 }
