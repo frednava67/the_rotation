@@ -113,8 +113,17 @@ def process_add_bottom(request):
 
 def show_combomaker(request):
     print("show_combomaker()")
-    
-    return render(request, "combomaker.html")
+    logged_in_user_id = request.session['user_id']
+
+    user_tops = Top.objects.filter(top_added_by_id=logged_in_user_id).all()
+    user_bottoms = Bottom.objects.filter(bottom_added_by_id=logged_in_user_id).all()
+
+    context = {
+        "tops": user_tops,
+        "bottoms": user_bottoms,
+    }
+
+    return render(request, "combomaker.html", context)
 
 def logoff(request):
     print("logoff()")

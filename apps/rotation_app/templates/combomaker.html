@@ -21,27 +21,31 @@
 </head>
 
 <body>
-    <div id="playlist1">
-        <div class="slick" style="background-color: red"><h3>1</h3></div>
-        <div class="slick" style="background-color: yellow"><h3>2</h3></div>
-        <div class="slick" style="background-color: green"><h3>3</h3></div>
-        <div class="slick" style="background-color: blue"><h3>4</h3></div>
-        <div class="slick" style="background-color: brown"><h3>5</h3></div>
-        <div class="slick" style="background-color: gray"><h3>6</h3></div>
-    </div>    
-
-    <br>
-    <br>
-
-    <div id="playlist2">
-        <div class="slick" style="background-color: red"><h3>1</h3></div>
-        <div class="slick" style="background-color: yellow"><h3>2</h3></div>
-        <div class="slick" style="background-color: green"><h3>3</h3></div>
-        <div class="slick" style="background-color: blue"><h3>4</h3></div>
-        <div class="slick" style="background-color: brown"><h3>5</h3></div>
-        <div class="slick" style="background-color: gray"><h3>6</h3></div>
-    </div>    
-
+    <div class="container">
+        <div class="row d-flex justify-content-center margintop">
+            <div id="topChoice" class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 blackborder graybg">
+                <div id="playlist1">
+                    {% for top in tops %}
+                        <div class="slick">
+                            <img class="d-block w-100 fixedimgsize" src="{{ top.imageURL }}" alt="{{ top.name }}">
+                        </div>
+                    {% endfor %}
+                </div>    
+            </div>
+        </div>
+        <br>
+        <div class="row d-flex justify-content-center">
+            <div  id="bottomChoice" class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 blackborder graybg">
+                <div id="playlist2">
+                    {% for bottom in bottoms %}
+                        <div class="slick">
+                            <img class="d-block w-100 fixedimgsize" src="{{ bottom.imageURL }}" alt="{{ bottom.name }}">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js"></script>

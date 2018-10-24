@@ -1,3 +1,11 @@
+img {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+    width: 100px;
+    height: 300px;
+}
+
 #playlist1 {
     background:grey;    
     width:100%;
@@ -9,17 +17,15 @@
 }
 
 .slick {
-    background:black;
+    background:antiquewhite;
     color:white;
     text-align:center;
     border-right:1px solid white;
 }
-.slick h3 {
-    width:106px;
-}
+
 .slick-active {
-    background:orange;
+    background:antiquewhite;
 }
 .slick-center {
-    background:yellow;
+    background:white;
 }
