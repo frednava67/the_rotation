@@ -6,3 +6,4 @@ apps/.DS_Store
 apps/login_registration/.DS_Store
 db.sqlite3
 the_rotation/__pycache__/settings.cpython-36.pyc
+the_rotation/__pycache__/__init__.cpython-36.pyc
