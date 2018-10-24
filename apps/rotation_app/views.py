@@ -2,15 +2,27 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
-import re, bcrypt
+import re, bcrypt, datetime
 
 from .models import *
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 NAME_REGEX  = re.compile('[0-9]')
 
-# the index function is called when root is visited
+def getScheduledCombo(user_id):
+    current_date = datetime.datetime.today()
+    retObj = Schedule.objects.filter(date_scheduled=current_date).count()
+    if retObj.count() == 0:
+        return False
+    else:
+        return retObj
+        
 
+
+
+
+
+# the index function is called when root is visited
 def index(request):
     print("index()")
 
