@@ -18,9 +18,31 @@
 
 <body>
     <div class="container">
+<<<<<<< HEAD
+    <h1>This is your ROTATION, {{ user }}</h1><br>
+
+        <div class="row">
+            <div class="col-sm blackborder">
+                {% for top in tops %}
+                    {{ top.name }}<br> 
+                    <img src="{{ top.imageURL }}" width="128" height="128"><br>
+                    <br>
+                {% endfor %}
+            </div>
+            <div class="col-sm blackborder">
+                {% for bottom in bottoms %}
+                    {{ bottom.name }}<br>
+                    <img src="{{ bottom.imageURL }}" width="128" height="128"><br>
+                    <br>
+                {% endfor %}
+            </div>
+            <div class="col-sm blackborder">
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-interval=false data-keyboard=true>
+=======
         <div class="row d-flex justify-content-center margintop">
             <div id="topChoice" class="col-lg-4 blackborder">
                 <div id="carouselTops" class="carousel slide" data-ride="carousel" data-interval=false>
+>>>>>>> a37cdc390c67dbeb0293489dc8823b59ba866c40
                     <div class="carousel-inner">
                         {% for top in tops %}
                         <div class="carousel-item{% if forloop.counter == 1 %} active{% endif %}">

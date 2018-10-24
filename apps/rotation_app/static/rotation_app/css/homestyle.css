@@ -1,0 +1,37 @@
+.blackborder{
+    border: 1px solid black;
+
+}
+
+.padleftzero {
+    padding-left: 0px;
+}
+
+.fixedimgsize {
+    height: 350px;
+    width: 225px;
+}
+
+.margintop {
+    margin-top: 50px;
+}
+
+.blackborder {
+    border: 1px solid black;
+}
+
+.blackborder-right {
+    border-right: 1px solid black;
+}
+
+.blackborder-bottom {
+    border-bottom: 1px solid black;
+}
+
+.darkgraybg {
+    background-color: darkgray;
+}
+
+.graybg {
+    background-color: lightgray;
+}
