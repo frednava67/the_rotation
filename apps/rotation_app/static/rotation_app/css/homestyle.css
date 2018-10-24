@@ -1,28 +1,6 @@
-@media screen and (min-width: 1024px) {
-    #d1{
-        height:250px;
-    }
-}      
-
-@media screen and (max-width: 800px) {
-    #d1{
-        height:150px;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    #d1{
-        height:100px;
-    }
-}
-
 .blackborder{
     border: 1px solid black;
 
-}
-
-img {
-    width: auto;
 }
 
 .padleftzero {
@@ -30,8 +8,8 @@ img {
 }
 
 .fixedimgsize {
-    height: 400px;
-    width: 300px;
+    height: 350px;
+    width: 225px;
 }
 
 .margintop {
