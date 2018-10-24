@@ -1,0 +1,25 @@
+#playlist1 {
+    background:grey;    
+    width:100%;
+}
+
+#playlist2 {
+    background:darkgray;    
+    width:100%;
+}
+
+.slick {
+    background:black;
+    color:white;
+    text-align:center;
+    border-right:1px solid white;
+}
+.slick h3 {
+    width:106px;
+}
+.slick-active {
+    background:orange;
+}
+.slick-center {
+    background:yellow;
+}

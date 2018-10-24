@@ -111,6 +111,11 @@ def process_add_bottom(request):
 
     return redirect('/')
 
+def show_combomaker(request):
+    print("show_combomaker()")
+    
+    return render(request, "combomaker.html")
+
 def logoff(request):
     print("logoff()")
     return redirect('/login_registration/logoff')
