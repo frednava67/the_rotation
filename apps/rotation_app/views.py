@@ -116,6 +116,23 @@ def show_combomaker(request):
     
     return render(request, "combomaker.html")
 
+def edit_top(request):
+    if "user_id" not in request.session:
+        return redirect("/login_registration")
+
+    logged_in_user_id = request.session['user_id']
+    
+    user = User.objects.get(id=logged_in_user_id)
+    tops = Top.objects.all().filter(top_added_by_id=int(logged_in_user_id))
+    bottoms = Bottom.objects.all().filter(bottom_added_by_id=int(logged_in_user_id))
+
+    context = {
+        "user": user,
+        "tops": tops,
+        "bottoms": bottoms,
+    }
+    return render(request, 'edittop.html', context)
+
 def logoff(request):
     print("logoff()")
     return redirect('/login_registration/logoff')
