@@ -165,7 +165,7 @@ def show_combobrowser(request):
     return render(request, "combobrowser.html", context)
 
 
-def top(request):
+def tops(request):
     if "user_id" not in request.session:
         return redirect("/login_registration")
 
@@ -178,9 +178,9 @@ def top(request):
         "user": user,
         "tops": tops,
     }
-    return render(request, 'top.html', context)
+    return render(request, 'tops.html', context)
 
-def edit_bottom(request):
+def bottoms(request):
     if "user_id" not in request.session:
         return redirect("/login_registration")
 
@@ -193,7 +193,7 @@ def edit_bottom(request):
         "user": user,
         "bottoms": bottoms,
     }
-    return render(request, 'bottom.html', context)
+    return render(request, 'bottoms.html', context)
 
 
 def process_combo(request):
