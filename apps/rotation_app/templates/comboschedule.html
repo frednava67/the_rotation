@@ -36,11 +36,13 @@
                             <p style="text-decoration: underline">{{ combo.date_scheduled.month }}/{{ combo.date_scheduled.day }}/{{ combo.date_scheduled.year }}</p>
                             <p><img src="{{ combo.combo_chosen.top_chosen.imageURL }}" height="50" width="50"> {{ combo.combo_chosen.top_chosen.name }}</p>
                             <p><img src="{{ combo.combo_chosen.bottom_chosen.imageURL }}" height="50" width="50"> {{ combo.combo_chosen.bottom_chosen.name }}</p>  
-                            <hr>    
-                            <form action="delete_scheduled_combo" method="POST">
-                                <input type="submit" name="comboid" value="{{ combo.id }}">Delete</input>
+                            <form action="delete_scheduled" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="scheduledcomboid" value="{{ combo.id }}">
+                                <input type="submit" class="btn btn-danger" value="Unschedule">
                             </form>                                                 
-                        {% endfor %}
+                            <hr>    
+                            {% endfor %}
                     </div>            
                 </div>
             </div>

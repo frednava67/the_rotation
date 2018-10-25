@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^process_add_top$', views.process_add_top),
     url(r'^process_schedulecombo$', views.process_schedulecombo),
     url(r'^show_schedule$', views.show_schedule),    
+    url(r'^delete_scheduled$', views.delete_scheduled_combo),    
     url(r'^process_add_bottom$', views.process_add_bottom),
     url(r'^tops$', views.tops),
     url(r'^bottoms$', views.bottoms),

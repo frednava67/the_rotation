@@ -276,6 +276,15 @@ def delete_bottom(request, id):
         bottom.delete()
     return redirect('/bottoms')
 
+def delete_scheduled_combo(request):
+    logged_in_user_id = request.session['user_id']
+
+    if request.method == "POST":
+        scheduled_combo_to_delete = request.POST['scheduledcomboid']
+        objScheduledCombo = Schedule.objects.get(id=scheduled_combo_to_delete)
+        objScheduledCombo.delete()
+
+    return redirect('/show_schedule')
 
 def logoff(request):
     print("logoff()")
