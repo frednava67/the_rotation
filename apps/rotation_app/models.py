@@ -26,6 +26,14 @@ class ClothingManager(models.Manager):
             messages.error(newrequest, u"[Image URL cannot be blank]", extra_tags="imageurl")
             bFlashMessage = True  
 
+        # Image URL should be re-used by the user so we'll error out if they try to reuse the same URL
+        # Logically it shouldn't appear in either tops or bottoms
+        objTopImage = Top.objects.filter(imageURL=imageURL)
+        objBottomImage = Bottom.objects.filter(imageURL=imageURL)        
+        if objTopImage.count() > 0 or objBottomImage.count() > 0:
+            messages.error(newrequest, u"[Image URL already in database!]", extra_tags="imageurl")
+            bFlashMessage = True 
+
         # Image URL must be publically visible and have a content type of image
         if not URL_REGEX.match(imageURL):
             messages.error(newrequest, u"[Invalid Image URL!]", extra_tags="imageurl")
