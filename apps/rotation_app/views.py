@@ -18,18 +18,15 @@ def getScheduledCombo(user_id):
 #Model.objects.filter(datetime__range=(start, end))        <h5>Here is your scheduled combo for the day!</h5>
 
     retObj = Schedule.objects.filter(date_scheduled__range=(start, end))
+    print(retObj)
     if retObj.count() == 0:
         return None
     else:
         return retObj
 
-
-
-
 # the index function is called when root is visited
 def index(request):
     print("index()")
-
 
     if "user_id" not in request.session:
         return redirect("/login_registration")
@@ -38,6 +35,7 @@ def index(request):
     user = User.objects.get(id=logged_in_user_id)
 
     scheduled_combo = getScheduledCombo(logged_in_user_id)
+    print(scheduled_combo.count())
 
     if scheduled_combo == None:
         context = {
@@ -45,18 +43,14 @@ def index(request):
         }
         return render(request, "home_none.html", context)
     elif scheduled_combo:
-        combo_id = scheduled_combo.combo_chosen_id
-        combo = Combo.objects.get(id=combo_id)
-        top = combo.top_chosen
-        bottom = combo.bottom_chosen
+        print(scheduled_combo)
+        combos = Combo.objects.all()
         
         context = {
             "user": user,
-            "top": top,
-            "bottom": bottom,
+            "combos": combos,
         }
         return render(request, "home_combo_found.html", context)
-    
 
     tops = Top.objects.all().filter(top_added_by_id=int(logged_in_user_id))
     bottoms = Bottom.objects.all().filter(bottom_added_by_id=int(logged_in_user_id))
