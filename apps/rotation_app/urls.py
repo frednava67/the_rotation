@@ -14,6 +14,9 @@ urlpatterns = [
     url(r'^process_schedulecombo$', views.process_schedulecombo),
     url(r'^show_schedule$', views.show_schedule),    
     url(r'^process_add_bottom$', views.process_add_bottom),
-    url(r'^edit_top$', views.edit_top),
+    url(r'^tops$', views.tops),
+    url(r'^bottoms$', views.bottoms),
     url(r'^logoff$', views.logoff),
+    url(r'^delete_top/(?P<id>\d+)$', views.delete_top),
+    url(r'^delete_bottom/(?P<id>\d+)$', views.delete_bottom),
 ]

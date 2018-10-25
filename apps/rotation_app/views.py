@@ -165,7 +165,7 @@ def show_combobrowser(request):
     return render(request, "combobrowser.html", context)
 
 
-def edit_top(request):
+def tops(request):
     if "user_id" not in request.session:
         return redirect("/login_registration")
 
@@ -173,14 +173,28 @@ def edit_top(request):
     
     user = User.objects.get(id=logged_in_user_id)
     tops = Top.objects.all().filter(top_added_by_id=int(logged_in_user_id))
-    bottoms = Bottom.objects.all().filter(bottom_added_by_id=int(logged_in_user_id))
 
     context = {
         "user": user,
         "tops": tops,
+    }
+    return render(request, 'tops.html', context)
+
+def bottoms(request):
+    if "user_id" not in request.session:
+        return redirect("/login_registration")
+
+    logged_in_user_id = request.session['user_id']
+    
+    user = User.objects.get(id=logged_in_user_id)
+    bottoms = Bottom.objects.all().filter(bottom_added_by_id=int(logged_in_user_id))
+
+    context = {
+        "user": user,
         "bottoms": bottoms,
     }
-    return render(request, 'edittop.html', context)
+    return render(request, 'bottoms.html', context)
+
 
 def process_combo(request):
     print("process_combo()")
@@ -189,7 +203,10 @@ def process_combo(request):
 
     if request.method == "POST":
         print(request.POST['currentTopID'])
-        print(request.POST['currentBottomID'])        
+        print(request.POST['currentBottomID'])  
+        errors = Combo.objects.combo_validator(request.POST)    
+        if len(errors):
+            return redirect('/create_combo')
 
         top_id = request.POST['currentTopID']
         bottom_id = request.POST['currentBottomID']
@@ -246,6 +263,18 @@ def show_schedule(request):
     }
 
     return render(request, "comboschedule.html", context)    
+
+def delete_top(request, id):
+    top = Top.objects.get(id=id)
+    if int(request.session['user_id']) == top.top_added_by_id: 
+        top.delete()
+    return redirect('/tops')
+
+def delete_bottom(request, id):
+    bottom = Bottom.objects.get(id=id)
+    if int(request.session['user_id']) == bottom.bottom_added_by_id: 
+        bottom.delete()
+    return redirect('/bottoms')
 
 
 def logoff(request):
