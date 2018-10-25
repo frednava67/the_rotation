@@ -26,8 +26,8 @@
             <a href="logoff">Logout</a>
         </div>
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-        <div class='head'> 
-                <h4>Edit Your Tops</h4>
+        <div class="text-center head container-fluid"> 
+                <h4 >Edit Your Tops</h4>
         </div>
         <div class="container-fluid">
             <div class="row d-flex justify-content-center margintop">
@@ -52,10 +52,22 @@
                 </div>    
             </div>
         </div>
-        <div class='buttons'>
-            <a href='add_top' class="btn btn-success">Add A New Top</a>
-            <a class="btn btn-info">Edit Current Top</a>       
-            <a class="btn btn-danger">Delete Current Top</a>
+        <div class="row text-center">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <a href='add_top' class="btn btn-success">Add A New Top</a>
+                </div>            
+        </div>
+        <br>
+        <div class="row text-center">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <a class="btn btn-info ">Edit Current Top</a>       
+                </div>            
+        </div>
+        <br>
+        <div class="row text-center">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <a class="btn btn-danger">Delete Current Top</a>
+            </div>            
         </div>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -76,6 +88,22 @@
             function closeNav() {
                 document.getElementById("mySidenav").style.width = "0";
             }
+
+            $(".carousel").on("touchstart", function(event){
+                var xClick = event.originalEvent.touches[0].pageX;
+                $(this).one("touchmove", function(event){
+                    var xMove = event.originalEvent.touches[0].pageX;
+                    if( Math.floor(xClick - xMove) > 5 ){
+                        $(this).carousel('next');
+                    }
+                    else if( Math.floor(xClick - xMove) < -5 ){
+                        $(this).carousel('prev');
+                    }
+                });
+                $(".carousel").on("touchend", function(){
+                        $(this).off("touchmove");
+                });
+            });  
         </script>
     </body>
 </html>
