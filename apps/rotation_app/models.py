@@ -48,8 +48,8 @@ class ClothingManager(models.Manager):
 
 class ComboManager(models.Manager):
     def combo_validator(self, comboData):
-        tops = Combo.objects.get(id = comboData.POST['top_id'])
-        bottoms = Combo.objects.get(id = comboData.POST['bottom_id'])
+        tops = Combo.objects.get(id = comboData.POST['currentTopID'])
+        bottoms = Combo.objects.get(id = comboData.POST['currentBottomID'])
         if tops and bottoms:
             messages.error(comboData, u"[combo already exists]", extra_tags="combo")
 

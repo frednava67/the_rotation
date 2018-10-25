@@ -179,7 +179,10 @@ def process_combo(request):
 
     if request.method == "POST":
         print(request.POST['currentTopID'])
-        print(request.POST['currentBottomID'])        
+        print(request.POST['currentBottomID'])  
+        errors = Combo.objects.combo_validator(request.POST)    
+        if len(errors):
+            return redirect('/create_combo')
 
         top_id = request.POST['currentTopID']
         bottom_id = request.POST['currentBottomID']
