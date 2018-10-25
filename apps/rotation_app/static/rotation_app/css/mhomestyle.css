@@ -1,8 +1,9 @@
-.head{
+.head h4{
+    font-size: 400%;
+    width:90%;
     display: inline-block;
-    text-align: center;
-    vertical-align: top;
-    margin-left: 5%;
+    margin: 0px;
+
 }
 #mysidenav{
     display: inline-block;
@@ -86,12 +87,13 @@ img {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
-.buttons{
+/* .row{
     text-align: center;
+    width: 100%;
+    height: 15%
 }
-.button a{
-    display: inline-block;
-    width: 75%;
-    height: 2%;
-    margin: 10px 0px;
-}
+.row a{
+    /* width: 50%;
+    display: block;
+    margin: 0 auto;
+} */ */

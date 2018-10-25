@@ -46,6 +46,18 @@ class ClothingManager(models.Manager):
 
         return bFlashMessage
 
+class ComboManager(models.Manager):
+    def combo_validator(self, comboData):
+        tops = Combo.objects.get(id = comboData.POST['top_id'])
+        bottoms = Combo.objects.get(id = comboData.POST['bottom_id'])
+        if tops and bottoms:
+            messages.error(comboData, u"[combo already exists]", extra_tags="combo")
+
+        return messages
+
+
+
+
 class Top(models.Model):
     name = models.CharField(max_length=255)
     imageURL = models.CharField(max_length=1024)
@@ -71,6 +83,7 @@ class Combo(models.Model):
     top_chosen = models.ForeignKey(Top, null=True, on_delete=models.SET_NULL, related_name="combo_top")
     bottom_chosen = models.ForeignKey(Bottom, null=True, on_delete=models.SET_NULL, related_name="combo_bottom")    
     created_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="combo_by")  
+    objects = ComboManager()
 
 class Schedule(models.Model):
     date_scheduled = models.DateTimeField()
