@@ -20,4 +20,6 @@ urlpatterns = [
     url(r'^logoff$', views.logoff),
     url(r'^delete_top/(?P<id>\d+)$', views.delete_top),
     url(r'^delete_bottom/(?P<id>\d+)$', views.delete_bottom),
+    url(r'^edit_top/(?P<id>\d+)$', views.edit_top),
+    url(r'^edit_bottom/(?P<id>\d+)$', views.edit_bottom),
 ]

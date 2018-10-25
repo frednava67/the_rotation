@@ -45,6 +45,13 @@ class ClothingManager(models.Manager):
                 bFlashMessage = True                
 
         return bFlashMessage
+    
+    def db_check(request, postData):
+        check = Top.objects.filter(id = postData['textImageURL'])
+        if len(check):
+            messages.error(newrequest, u"[You have already uploaded this image]", extra_tags="imageurl")
+        return messages
+
 
 class ComboManager(models.Manager):
     def combo_validator(self, comboData):
