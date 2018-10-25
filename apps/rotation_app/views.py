@@ -9,20 +9,19 @@ from .models import *
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 NAME_REGEX  = re.compile('[0-9]')
 
-def getScheduledCombo(user_id):
+def getScheduledCombos(user_id):
+    print("getScheduledCombo()")
     current_date = datetime.datetime.today()
-    print(current_date)
-
     start = datetime.date.today()
     end = start + datetime.timedelta(days=1)
 #Model.objects.filter(datetime__range=(start, end))        <h5>Here is your scheduled combo for the day!</h5>
 
-    retObj = Schedule.objects.filter(date_scheduled__range=(start, end))
-    print(retObj)
+    retObj = Schedule.objects.filter(scheduled_by_id=user_id).all().filter(date_scheduled__range=(start, end))
+#    print(retObj.values())
     if retObj.count() == 0:
         return None
     else:
-        return retObj
+        return retObj.all()
 
 # the index function is called when root is visited
 def index(request):
@@ -34,21 +33,22 @@ def index(request):
     logged_in_user_id = request.session['user_id']
     user = User.objects.get(id=logged_in_user_id)
 
-    scheduled_combo = getScheduledCombo(logged_in_user_id)
-    print(scheduled_combo.count())
+    scheduled_combos = getScheduledCombos(logged_in_user_id)
+    print(scheduled_combos.count())
 
-    if scheduled_combo == None:
+    if scheduled_combos == None:
         context = {
             "user": user,
         }
         return render(request, "home_none.html", context)
-    elif scheduled_combo:
-        print(scheduled_combo)
-        combos = Combo.objects.all()
+    elif scheduled_combos:
+        print(scheduled_combos)
+        strdate = datetime.datetime.strftime(datetime.datetime.today(), "%m-%d-%Y")
         
         context = {
             "user": user,
-            "combos": combos,
+            "date": strdate,
+            "combos": scheduled_combos,
         }
         return render(request, "home_combo_found.html", context)
 

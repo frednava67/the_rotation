@@ -17,11 +17,14 @@
 </head>
 
 <body>
-    <div class="row d-flex justify-content-center">
-        <h4>Welcome to your ROTATION, {{ user }}!</h4><br>
+    <div class="row d-flex justify-content-center ">
+        <h5>Welcome to your ROTATION, {{ user }}!</h5>
     </div>
     <div class="row d-flex justify-content-center">
-        <h5>Here's what's on your schedule for the day!</h5>
+        <h6>Here's what's on your schedule for the day</h6>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <h5>{{ date }}</h5>        
     </div>
     <div class="container">
         <div class="row d-flex justify-content-center margintop">        
@@ -31,11 +34,11 @@
                         <div class="carousel-inner">
                             {% for combo in combos %}
                             <div class="carousel-item{% if forloop.counter == 1 %} active{% endif %}">
-                                <img id="ccombos_item{{ forloop.counter }}" class="d-block w-100 fixedimgsize" src="{{ combo.top_chosen.imageURL }}" alt="{{ combo.top_chosen.name }}" data_combo_id="{{ combo.id }}">
-                                <img class="d-block w-100 fixedimgsize" src="{{ combo.bottom_chosen.imageURL }}" alt="{{ combo.botom_chosen.name }}">
+                                <img id="ccombos_item{{ forloop.counter }}" class="d-block w-100 fixedimgsize" src="{{ combo.combo_chosen.top_chosen.imageURL }}" alt="{{ combo.top_chosen.name }}" data_combo_id="{{ combo.id }}">
+                                <img class="d-block w-100 fixedimgsize" src="{{ combo.combo_chosen.bottom_chosen.imageURL }}" alt="{{ combo.combo_chosen.botom_chosen.name }}">
                                 <div class="carousel-caption">
-                                    <p class="labeltext">{{ combo.top_chosen.name }}</p>
-                                    <p class="labeltext">{{ combo.bottom_chosen.name }}</p>
+                                    <p class="labeltext">{{ combo.combo_chosen.top_chosen.name }}</p>
+                                    <p class="labeltext">{{ combo.combo_chosen.bottom_chosen.name }}</p>
                                 </div>
                             </div>
                             {% endfor %}
