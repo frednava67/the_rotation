@@ -41,6 +41,11 @@
                             <div class="carousel-caption">
                                 <p class="labeltext">{{ combo.top_chosen.name }}</p>
                                 <p class="labeltext">{{ combo.bottom_chosen.name }}</p>
+                                <form action="delete_combo" method="POST">
+                                {% csrf_token %}
+                                    <input type="hidden" name="deleteComboID" id="deleteComboID{{ forloop.counter }}">
+                                    <input type="submit" class="btn btn-danger" value="Delete Combo">
+                                </form>
                             </div>
                         </div>
                         {% endfor %}
@@ -92,8 +97,10 @@
             console.log("PAGE LOADED");
             console.log("Active Combo: ", document.getElementById("ccombos_item1").getAttribute("data_combo_id"));
             data_combo_id = document.getElementById("ccombos_item1").getAttribute("data_combo_id");
-            document.getElementById("currentComboID").setAttribute("value", data_combo_id);
-        });
+            console.log(data_combo_id)
+            document.getElementById('currentComboID').setAttribute("value", data_combo_id);
+            document.getElementById('deleteComboID1').setAttribute("value", data_combo_id);
+});
 
         $(".carousel").on("touchstart", function(event){
             var xClick = event.originalEvent.touches[0].pageX;
@@ -116,7 +123,8 @@
             console.log("ccombos_item" + String(event.to + 1));
             console.log(document.getElementById("ccombos_item" + String(event.to + 1)).getAttribute("data_combo_id"));
             data_combo_id = document.getElementById("ccombos_item" + String(event.to + 1)).getAttribute("data_combo_id");
-            $('#currentComboID').val(String(data_combo_id));
+            document.getElementById('currentComboID').setAttribute("value", data_combo_id);
+            document.getElementById('deleteComboID' + String(event.to + 1)).setAttribute("value", data_combo_id);
         });
 
 

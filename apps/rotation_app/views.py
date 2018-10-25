@@ -204,8 +204,8 @@ def process_combo(request):
     if request.method == "POST":
         print(request.POST['currentTopID'])
         print(request.POST['currentBottomID'])  
-        errors = Combo.objects.combo_validator(request.POST)    
-        if len(errors):
+        bFlashMessage = Combo.objects.combo_validator(request)    
+        if bFlashMessage:
             return redirect('/create_combo')
 
         top_id = request.POST['currentTopID']
@@ -285,6 +285,18 @@ def delete_scheduled_combo(request):
         objScheduledCombo.delete()
 
     return redirect('/show_schedule')
+
+def delete_combo(request):
+    print("delete_combo")
+
+    logged_in_user_id = request.session['user_id']
+
+    if request.method == "POST":
+        combo_id = request.POST['deleteComboID']
+        combo_to_delete = Combo.objects.get(id=combo_id)
+        combo_to_delete.delete()
+
+    return redirect('/browse_combos')
 
 def logoff(request):
     print("logoff()")

@@ -48,12 +48,16 @@ class ClothingManager(models.Manager):
 
 class ComboManager(models.Manager):
     def combo_validator(self, comboData):
+
+        bFlashMessage = False
+
         tops = Combo.objects.get(id = comboData.POST['currentTopID'])
         bottoms = Combo.objects.get(id = comboData.POST['currentBottomID'])
         if tops and bottoms:
             messages.error(comboData, u"[combo already exists]", extra_tags="combo")
+            bFlashMessage = True
 
-        return messages
+        return bFlashMessage
 
 
 
