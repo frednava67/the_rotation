@@ -226,14 +226,15 @@ def process_combo(request):
         print(request.POST['currentBottomID'])  
         bFlashMessage = Combo.objects.combo_validator(request)    
         if bFlashMessage:
-            return redirect('/create_combo')
+            print("COMBO ALREADY EXISTS")
+            return redirect('/browse_combos')
 
         top_id = request.POST['currentTopID']
         bottom_id = request.POST['currentBottomID']
 
         Combo.objects.create(top_chosen_id=top_id, bottom_chosen_id=bottom_id, created_by_id=logged_in_user_id)
 
-    return redirect('/')                
+    return redirect('/browse_combos')                
 
 def show_comboscheduler(request):
     print("show_comboscheduler()")

@@ -58,10 +58,10 @@ class ComboManager(models.Manager):
 
         bFlashMessage = False
 
-        tops = Combo.objects.get(id = comboData.POST['currentTopID'])
-        bottoms = Combo.objects.get(id = comboData.POST['currentBottomID'])
-        if tops and bottoms:
-            messages.error(comboData, u"[combo already exists]", extra_tags="combo")
+        tops = Combo.objects.filter(top_chosen_id=comboData.POST['currentTopID'])
+        tops_bottoms = tops.filter(bottom_chosen_id=comboData.POST['currentBottomID'])
+        if tops_bottoms.count() > 0:
+            messages.error(comboData, u"[This Combo already exists]", extra_tags="combo")
             bFlashMessage = True
 
         return bFlashMessage
