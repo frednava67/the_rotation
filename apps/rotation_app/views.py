@@ -144,6 +144,22 @@ def edit_top(request):
     }
     return render(request, 'edittop.html', context)
 
+def process_combo(request):
+    print("process_combo()")
+
+    logged_in_user_id = request.session['user_id']
+
+    if request.method == "POST":
+        print(request.POST['currentTopID'])
+        print(request.POST['currentBottomID'])        
+
+        top_id = request.POST['currentTopID']
+        bottom_id = request.POST['currentBottomID']
+
+        Combo.objects.create(top_chosen_id=top_id, bottom_chosen_id=bottom_id, created_by_id=logged_in_user_id)
+
+    return redirect('/')                
+
 def logoff(request):
     print("logoff()")
     return redirect('/login_registration/logoff')
