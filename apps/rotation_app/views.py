@@ -196,6 +196,26 @@ def bottoms(request):
     return render(request, 'bottoms.html', context)
 
 
+def edit_top(request, id):
+    top = Top.objects.get(id = id)
+    if int(request.session['user_id']) == top.top_added_by_id: 
+        context = {
+            'top' : top,
+        }
+        return render(request, 'edittop.html', context)
+    return redirect('/')
+
+
+def edit_bottom(request, id):
+    bottom = Bottom.objects.get(id = id)
+    if int(request.session['user_id']) == bottom.bottom_added_by_id: 
+        context = {
+            'bottom' : bottom,
+        }
+        return render(request, 'editbottom.html', context)
+    return redirect('/')
+
+
 def process_combo(request):
     print("process_combo()")
 
