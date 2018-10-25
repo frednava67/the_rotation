@@ -155,6 +155,22 @@ def show_combomaker(request):
 
     return render(request, "combomaker.html", context)
 
+def show_combobrowser(request):
+    print("show_combobrowser()")
+
+    logged_in_user_id = request.session['user_id']
+    user = User.objects.get(id=logged_in_user_id)
+
+    combos = User.objects.get(id=logged_in_user_id).combo_by.all()
+
+    context = {
+        "user":  user,
+        "combos": combos,
+    }
+
+    return render(request, "combobrowser.html", context)
+
+
 def edit_top(request):
     if "user_id" not in request.session:
         return redirect("/login_registration")
@@ -190,6 +206,56 @@ def process_combo(request):
         Combo.objects.create(top_chosen_id=top_id, bottom_chosen_id=bottom_id, created_by_id=logged_in_user_id)
 
     return redirect('/')                
+
+def show_comboscheduler(request):
+    print("show_comboscheduler()")
+
+    logged_in_user_id = request.session['user_id']
+
+    if request.method == "POST":
+        combo_id = request.POST['currentComboID']
+        user = User.objects.get(id=logged_in_user_id)
+        chosen_combo = Combo.objects.get(id=combo_id)
+
+        context = {
+            "user": user,
+            "combo": chosen_combo,
+        }
+
+    return render(request, "comboscheduler.html", context)
+
+def process_schedulecombo(request):
+    print("process_schedulecombo()")
+
+    if request.method == "POST":
+        print(request.POST['userid'])
+        print(request.POST['comboid'])
+        print(request.POST['chosendate'])
+
+        uid = request.POST['userid']
+        comboid = request.POST['comboid']
+        strscheduleddate = request.POST['chosendate']
+
+        objdt = datetime.datetime.strptime(strscheduleddate, '%m-%d-%Y')
+        Schedule.objects.create(date_scheduled=objdt, combo_chosen_id=int(comboid), scheduled_by_id=int(uid))
+
+    return redirect('/show_schedule')
+
+def show_schedule(request):
+    print("show_schedule()")
+
+    logged_in_user_id = request.session['user_id']
+    user = User.objects.get(id=logged_in_user_id)
+
+    scheduledcombos = Schedule.objects.filter(scheduled_by_id=logged_in_user_id).order_by("date_scheduled")
+
+    context = {
+        "user": user,
+        "scheduledcombos": scheduledcombos,
+    }
+
+    return render(request, "comboschedule.html", context)    
+
 
 def logoff(request):
     print("logoff()")
