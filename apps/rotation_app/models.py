@@ -90,5 +90,5 @@ class Schedule(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     # relationships
-    combo_chosen = models.ForeignKey(Top, null=True, on_delete=models.SET_NULL, related_name="chosen_combo")
+    combo_chosen = models.ForeignKey(Combo, null=True, on_delete=models.SET_NULL, related_name="chosen_combo")
     scheduled_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="combo_scheduled_by")    
