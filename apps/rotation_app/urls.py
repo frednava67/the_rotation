@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^browse_combos$', views.show_combobrowser),    
     url(r'^delete_combo$', views.delete_combo),        
     url(r'^schedule_combo$', views.show_comboscheduler),        
+    url(r'^get_lucky$', views.random_combo),            
     url(r'^process_add_top$', views.process_add_top),
     url(r'^process_schedulecombo$', views.process_schedulecombo),
     url(r'^show_schedule$', views.show_schedule),    

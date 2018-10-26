@@ -17,13 +17,29 @@
 </head>
 
 <body>
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center headspace">
         <h4>Welcome to your ROTATION, {{ user }}!</h4>
     </div>
     <div class="container">
-        <div class="row d-flex justify-content-center margintop">
-            You have no combos scheduled for today.  Would you like to find a combo?
-        </div>                
+        <div class="row">
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-1 d-none d-sm-block"></div>
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-12 styleddiv">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="row d-flex justify-content-center margintop">
+                            You have no combos scheduled for today.  Would you like to find a combo?
+                        </div>     
+                        <div class="row d-flex justify-content-center margintop">
+                            <a href="get_lucky" class="btn btn-success btn-lg btn-block">I'm Feeling Lucky!</a>
+                        </div>
+                        <div class="row d-flex justify-content-center margintop">            
+                            <a href="browse_combos" class="btn btn-info btn-lg btn-block">Browse My Combos</a>
+                        </div>     
+                    </div>            
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-1 d-none d-sm-block"></div>
+        </div>
     </div>
 
     <!-- Optional JavaScript -->
