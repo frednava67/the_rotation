@@ -26,6 +26,14 @@ class ClothingManager(models.Manager):
             messages.error(newrequest, u"[Image URL cannot be blank]", extra_tags="imageurl")
             bFlashMessage = True  
 
+        # Image URL should be re-used by the user so we'll error out if they try to reuse the same URL
+        # Logically it shouldn't appear in either tops or bottoms
+        objTopImage = Top.objects.filter(imageURL=imageURL)
+        objBottomImage = Bottom.objects.filter(imageURL=imageURL)        
+        if objTopImage.count() > 0 or objBottomImage.count() > 0:
+            messages.error(newrequest, u"[Image URL already in database!]", extra_tags="imageurl")
+            bFlashMessage = True 
+
         # Image URL must be publically visible and have a content type of image
         if not URL_REGEX.match(imageURL):
             messages.error(newrequest, u"[Invalid Image URL!]", extra_tags="imageurl")
@@ -61,10 +69,10 @@ class ComboManager(models.Manager):
 
         bFlashMessage = False
 
-        tops = Combo.objects.get(id = comboData.POST['currentTopID'])
-        bottoms = Combo.objects.get(id = comboData.POST['currentBottomID'])
-        if tops and bottoms:
-            messages.error(comboData, u"[combo already exists]", extra_tags="combo")
+        tops = Combo.objects.filter(top_chosen_id=comboData.POST['currentTopID'])
+        tops_bottoms = tops.filter(bottom_chosen_id=comboData.POST['currentBottomID'])
+        if tops_bottoms.count() > 0:
+            messages.error(comboData, u"[This Combo already exists]", extra_tags="combo")
             bFlashMessage = True
 
         return bFlashMessage
