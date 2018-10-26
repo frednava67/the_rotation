@@ -10,10 +10,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
 
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'rotation_app/css/addclothesstyle.css' %}">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />        
 
-    <title>The Rotation - Edit Top</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'rotation_app/css/homestyle.css' %}">
+
+    <title>The Rotation - Schedule A Combo</title>
 </head>
 
 <body>
@@ -30,70 +32,90 @@
             </div>
             <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 
+    <div class="row d-flex justify-content-center">
+        <h4>Combo Scheduler</h4>
+    </div>
     <div class="container">
+
         <div class="row headspace">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"></div>            
         </div>
-        <div class="row">
+        <div class="row blackborder">
             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-1 d-none d-sm-block">
             </div>
             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-12 styleddiv">
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 formheader">
-                        Edit top
-                    </div>            
-                </div>
-                <form action="/process_edit_top/{{top.id}}" class="addform" method="POST">
+                <form action="/process_schedulecombo" class="addform" method="POST">
                 {% csrf_token %}
                     <div class="form-group">
-                        <div class="col form-fixer">
-                            <textarea type="text" class="form-control" name="textName">{{top.name}}</textarea>
+                        <div class="col">
+                            <br>
+                            <label class="datelabel">Select Date: </label>
+                            <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+                                <input class="form-control" type="text" readonly name="chosendate" />
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <img src="{{ combo.top_chosen.imageURL }}" alt="{{ combo.top_chosen.name }}">
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                                <img src="{{ combo.bottom_chosen.imageURL }}" alt="{{ combo.bottom_chosen.name }}">                                
                         </div>
                         <div class="col formflash">
                             {% if messages %}
                                 {% for message in messages %}
-                                    {% if "name" in message.tags %} {{ message }} {% endif %}
+                                    {% if "chosendate" in message.tags %} {{ message }} {% endif %}
                                 {% endfor %}
                             {% endif %}
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col form-fixer">
-                            <img class="d-block w-100 fixedimgsize" src="{{ top.imageURL }}" alt="{{ top.name }}">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col text-right">
+                        <div class="col text-center">
                             <input type="hidden" name="userid" value="{{ user.id }}">
-                            <input type="submit" class="btn btn-primary pull-right" name="submitbtn" value="Save Changes">
-                            <a class="btn btn-danger pull-right" href="delete/{{top.id}}">Delete Top</a>
+                            <input type="hidden" name="comboid" value="{{ combo.id }}">                            
+                            <input type="submit" class="btn btn-primary" name="submitbtn" value="Add To My Schedule">
                         </div>
                     </div>
                 </form>
             </div>
             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-1 d-none d-sm-block">
             </div>
-        </div>
+        </div>        
+
+
     </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js"></script>
+    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-        <script>
-                function openNav() {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+
+    <script>
+        $(function () {
+            $("#datepicker").datepicker({ 
+                    autoclose: true, 
+                    todayHighlight: true
+            }).datepicker('update', new Date());
+        });
+        function openNav() {
                     document.getElementById("mySidenav").style.width = "250px";
                 }
                 
                 function closeNav() {
                     document.getElementById("mySidenav").style.width = "0";
                 }
-        </script>
 
-    </body>
+
+
+</script>
+
+</body>
 
 </html>

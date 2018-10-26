@@ -13,7 +13,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'rotation_app/css/addclothesstyle.css' %}">
 
-    <title>The Rotation - Edit Top</title>
+    <title>The Rotation - Scheduled Combos</title>
 </head>
 
 <body>
@@ -29,7 +29,7 @@
                 <a href="logoff">Logout</a>
             </div>
             <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-
+        
     <div class="container">
         <div class="row headspace">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"></div>            
@@ -40,36 +40,24 @@
             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-12 styleddiv">
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 formheader">
-                        Edit top
+                        <h2>Scheduled Combos for {{ user }}</h2>
                     </div>            
                 </div>
-                <form action="/process_edit_top/{{top.id}}" class="addform" method="POST">
-                {% csrf_token %}
-                    <div class="form-group">
-                        <div class="col form-fixer">
-                            <textarea type="text" class="form-control" name="textName">{{top.name}}</textarea>
-                        </div>
-                        <div class="col formflash">
-                            {% if messages %}
-                                {% for message in messages %}
-                                    {% if "name" in message.tags %} {{ message }} {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col form-fixer">
-                            <img class="d-block w-100 fixedimgsize" src="{{ top.imageURL }}" alt="{{ top.name }}">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col text-right">
-                            <input type="hidden" name="userid" value="{{ user.id }}">
-                            <input type="submit" class="btn btn-primary pull-right" name="submitbtn" value="Save Changes">
-                            <a class="btn btn-danger pull-right" href="delete/{{top.id}}">Delete Top</a>
-                        </div>
-                    </div>
-                </form>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 formheader">
+                        {% for combo in scheduledcombos %}
+                            <p style="text-decoration: underline">{{ combo.date_scheduled.month }}/{{ combo.date_scheduled.day }}/{{ combo.date_scheduled.year }}</p>
+                            <p><img src="{{ combo.combo_chosen.top_chosen.imageURL }}" height="50" width="50"> {{ combo.combo_chosen.top_chosen.name }}</p>
+                            <p><img src="{{ combo.combo_chosen.bottom_chosen.imageURL }}" height="50" width="50"> {{ combo.combo_chosen.bottom_chosen.name }}</p>  
+                            <form action="delete_scheduled" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="scheduledcomboid" value="{{ combo.id }}">
+                                <input type="submit" class="btn btn-danger" value="Unschedule">
+                            </form>                                                 
+                            <hr>    
+                            {% endfor %}
+                    </div>            
+                </div>
             </div>
             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-1 d-none d-sm-block">
             </div>
@@ -93,6 +81,7 @@
                     document.getElementById("mySidenav").style.width = "0";
                 }
         </script>
+
 
     </body>
 
