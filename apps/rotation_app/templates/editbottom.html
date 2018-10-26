@@ -13,7 +13,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'rotation_app/css/addclothesstyle.css' %}">
 
-    <title>The Rotation - Edit Top</title>
+    <title>The Rotation - Edit Bottom</title>
 </head>
 
 <body>
@@ -27,14 +27,14 @@
             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-12 styleddiv">
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 formheader">
-                        Edit top
+                        Edit bottom
                     </div>            
                 </div>
-                <form action="/process_edit_top/{{top.id}}" class="addform" method="POST">
+                <form action="/process_edit_bottom/{{bottom.id}}" class="addform" method="POST">
                 {% csrf_token %}
                     <div class="form-group">
                         <div class="col form-fixer">
-                            <textarea type="text" class="form-control" name="textName">{{top.name}}</textarea>
+                            <textarea type="text" class="form-control" name="textName">{{bottom.name}}</textarea>
                         </div>
                         <div class="col formflash">
                             {% if messages %}
@@ -46,14 +46,14 @@
                     </div>
                     <div class="form-group">
                         <div class="col form-fixer">
-                            <img class="d-block w-100 fixedimgsize" src="{{ top.imageURL }}" alt="{{ top.name }}">
+                            <img class="d-block w-100 fixedimgsize" src="{{ bottom.imageURL }}" alt="{{ bottom.name }}">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col text-right">
                             <input type="hidden" name="userid" value="{{ user.id }}">
                             <input type="submit" class="btn btn-primary pull-right" name="submitbtn" value="Save Changes">
-                            <a class="btn btn-danger pull-right" href="delete/{{top.id}}">Delete Top</a>
+                            <a class="btn btn-danger pull-right" href="delete/{{bottom.id}}">Delete Bottom</a>
                         </div>
                     </div>
                 </form>

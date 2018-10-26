@@ -92,8 +92,8 @@ def process_add_top(request):
 
     if request.method == "POST":
         bFlashMessage = Top.objects.basic_validator(request)
-
-        if bFlashMessage:
+        bFM2 = Top.objects.db_check(request)
+        if bFlashMessage or bFM2:
             return redirect("/add_top")
         
         print(request.POST['userid'])
@@ -201,6 +201,14 @@ def edit_top(request, id):
         return render(request, 'edittop.html', context)
     return redirect('/')
 
+def process_edit_top(request, id):
+    if request.method == 'POST':
+        top = Top.objects.get(id = id)
+        top.name = request.POST['textName']
+        top.save()
+    return redirect('/tops')
+
+
 
 def edit_bottom(request, id):
     bottom = Bottom.objects.get(id = id)
@@ -210,6 +218,16 @@ def edit_bottom(request, id):
         }
         return render(request, 'editbottom.html', context)
     return redirect('/')
+
+
+def process_edit_bottom(request, id):
+    if request.method == 'POST':
+        bottom = Bottom.objects.get(id = id)
+        bottom.name = request.POST['textName']
+        bottom.save()
+    return redirect('/bottoms')
+
+
 
 
 def process_combo(request):
