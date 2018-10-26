@@ -13,7 +13,7 @@
         {% load static %}
         <link rel="stylesheet" href="{% static 'rotation_app/css/mhomestyle.css' %}">
 
-        <title>The Rotation | Edit Your Tops</title>
+        <title>The Rotation | Edit Your Bottoms</title>
     </head>
 
     <body>
@@ -29,49 +29,47 @@
                     <a href="logoff">Logout</a>
                 </div>
                 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-            <div class="text-center head container-fluid"> 
-                <h4 >Edit Your Tops</h4>
+                    <div class="text-center head container-fluid"> 
+                <h4 >Edit Your Bottoms</h4>
         </div>
         <div class="container-fluid">
-            <div class="row d-flex justify-content-center margintop">
-                <div id="topChoice" class="col-lg-4 blackborder graybg">
-                    <div id="carouselTops" class="carousel slide" data-ride="carousel" data-interval=false>
+            <div class="row d-flex justify-content-center">
+                <div  id="bottomChoice" class="col-lg-4 blackborder graybg">
+                    <div id="carouselBottoms" class="carousel slide" data-ride="carousel" data-interval=false>
                         <div class="carousel-inner">
-                            {% for top in tops %}
+                            {% for bottom in bottoms %}
                             <div class="carousel-item{% if forloop.counter == 1 %} active{% endif %}">
-                                <img id="ctops_item{{ forloop.counter }}" class="d-block w-100 fixedimgsize" src="{{ top.imageURL }}" alt="{{ top.name }}" data_top_id="{{ top.id }}">
+                                <img class="d-block w-100 fixedimgsize" src="{{ bottom.imageURL }}" alt="{{ bottom.name }}">
                             </div>
                             {% endfor %}
                         </div>
-                        <a class="carousel-control-prev" href="#carouselTops" role="button" data-slide="prev">
+                        <a class="carousel-control-prev" href="#carouselBottoms" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
                         </a>
-                        <a class="carousel-control-next" href="#carouselTops" role="button" data-slide="next">
+                        <a class="carousel-control-next" href="#carouselBottoms" role="button" data-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
                         </a>    
                     </div>
-                </div>    
-            </div>
+                </div>
+            </div>                
         </div>
-        <br>
         <div class="row text-center">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <a href='add_top' class="btn btn-success">Add A New Top</a>
+                    <a href='add_bottom' class="btn btn-success">Add A New Bottom</a>
                 </div>            
         </div>
         <br>
         <div class="row text-center">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <a id="edit_anchor" href="#" class="btn btn-info ">Edit Current Top</a>       
-                    <!-- throw in the id right here -->
+                    <a class="btn btn-info ">Edit Current Bottom</a>       
                 </div>            
         </div>
         <br>
         <div class="row text-center">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <a id="delete_anchor" href="#" class="btn btn-danger">Delete Current Top</a>
+                <a class="btn btn-danger">Delete Current Bottom</a>
             </div>            
         </div>
         <!-- Optional JavaScript -->
@@ -94,14 +92,6 @@
                 document.getElementById("mySidenav").style.width = "0";
             }
 
-            $(document).ready(function(){
-                console.log("PAGE LOADED");
-                console.log("Active Top: ", document.getElementById("ctops_item1").getAttribute("data_top_id"));
-                data_top_id = document.getElementById("ctops_item1").getAttribute("data_top_id");
-                document.getElementById("edit_anchor").setAttribute("href", "edit/" + data_top_id);
-                document.getElementById("delete_anchor").setAttribute("href", "delete/" + data_top_id);
-            });
-
             $(".carousel").on("touchstart", function(event){
                 var xClick = event.originalEvent.touches[0].pageX;
                 $(this).one("touchmove", function(event){
@@ -116,16 +106,7 @@
                 $(".carousel").on("touchend", function(){
                         $(this).off("touchmove");
                 });
-            }); 
-            $('#carouselTops').on('slid.bs.carousel', function (event) {
-                console.log("TOPS SLIDE COMPLETED");
-                console.log("ctops_item" + String(event.to + 1));
-                console.log(document.getElementById("ctops_item" + String(event.to + 1)).getAttribute("data_top_id"));
-                data_top_id = document.getElementById("ctops_item" + String(event.to + 1)).getAttribute("data_top_id");
-                document.getElementById("edit_anchor").setAttribute("href", "edit_top/" + data_top_id);
-                document.getElementById("delete_anchor").setAttribute("href", "delete_top/" + data_top_id);
-            });
-
+            });  
         </script>
     </body>
 </html>

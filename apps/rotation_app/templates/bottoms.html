@@ -13,7 +13,7 @@
         {% load static %}
         <link rel="stylesheet" href="{% static 'rotation_app/css/mhomestyle.css' %}">
 
-        <title>The Rotation | Edit Your Bottoms</title>
+        <title>The Rotation | Your Bottoms</title>
     </head>
 
     <body>
@@ -29,17 +29,17 @@
                     <a href="logoff">Logout</a>
                 </div>
                 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-                    <div class="text-center head container-fluid"> 
-                <h4 >Edit Your Bottoms</h4>
+            <div class="text-center head container-fluid"> 
+                <h4>Your Bottoms</h4>
         </div>
         <div class="container-fluid">
-            <div class="row d-flex justify-content-center">
-                <div  id="bottomChoice" class="col-lg-4 blackborder graybg">
+            <div class="row d-flex justify-content-center margintop">
+                <div id="bottomChoice" class="col-lg-4 blackborder graybg">
                     <div id="carouselBottoms" class="carousel slide" data-ride="carousel" data-interval=false>
                         <div class="carousel-inner">
                             {% for bottom in bottoms %}
                             <div class="carousel-item{% if forloop.counter == 1 %} active{% endif %}">
-                                <img class="d-block w-100 fixedimgsize" src="{{ bottom.imageURL }}" alt="{{ bottom.name }}">
+                                <img id="cbottoms_item{{ forloop.counter }}" class="d-block w-100 fixedimgsize" src="{{ bottom.imageURL }}" alt="{{ bottom.name }}" data_bottom_id="{{ bottom.id }}">
                             </div>
                             {% endfor %}
                         </div>
@@ -52,9 +52,10 @@
                             <span class="sr-only">Next</span>
                         </a>    
                     </div>
-                </div>
-            </div>                
+                </div>    
+            </div>
         </div>
+        <br>
         <div class="row text-center">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <a href='add_bottom' class="btn btn-success">Add A New Bottom</a>
@@ -63,13 +64,14 @@
         <br>
         <div class="row text-center">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <a class="btn btn-info ">Edit Current Bottom</a>       
+                    <a id="edit_anchor" href="#" class="btn btn-info ">Edit Current Bottom</a>       
+                    <!-- throw in the id right here -->
                 </div>            
         </div>
         <br>
         <div class="row text-center">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <a class="btn btn-danger">Delete Current Bottom</a>
+                <a id="delete_anchor" href="#" class="btn btn-danger">Delete Current Bottom</a>
             </div>            
         </div>
         <!-- Optional JavaScript -->
@@ -92,6 +94,14 @@
                 document.getElementById("mySidenav").style.width = "0";
             }
 
+            $(document).ready(function(){
+                console.log("PAGE LOADED");
+                console.log("Active Bottom: ", document.getElementById("cbottoms_item1").getAttribute("data_bottom_id"));
+                data_bottom_id = document.getElementById("cbottoms_item1").getAttribute("data_bottom_id");
+                document.getElementById("edit_anchor").setAttribute("href", "edit_bottom/" + data_bottom_id);
+                document.getElementById("delete_anchor").setAttribute("href", "delete_bottom/" + data_bottom_id);
+            });
+
             $(".carousel").on("touchstart", function(event){
                 var xClick = event.originalEvent.touches[0].pageX;
                 $(this).one("touchmove", function(event){
@@ -106,7 +116,16 @@
                 $(".carousel").on("touchend", function(){
                         $(this).off("touchmove");
                 });
-            });  
+            }); 
+            $('#carouselBottoms').on('slid.bs.carousel', function (event) {
+                console.log("BOTTOMS SLIDE COMPLETED");
+                console.log("cbottoms_item" + String(event.to + 1));
+                console.log(document.getElementById("cbottoms_item" + String(event.to + 1)).getAttribute("data_bottom_id"));
+                data_bottom_id = document.getElementById("cbottoms_item" + String(event.to + 1)).getAttribute("data_bottom_id");
+                document.getElementById("edit_anchor").setAttribute("href", "edit_bottom/" + data_bottom_id);
+                document.getElementById("delete_anchor").setAttribute("href", "delete_bottom/" + data_bottom_id);
+            });
+
         </script>
     </body>
 </html>
