@@ -11,9 +11,9 @@
             crossorigin="anonymous">
 
         {% load static %}
-        <link rel="stylesheet" href="{% static 'rotation_app/css/mhomestyle.css' %}">
+        <link rel="stylesheet" href="{% static 'rotation_app/css/homestyle.css' %}">
 
-        <title>The Rotation | Edit Your Tops</title>
+        <title>The Rotation | Your Tops</title>
     </head>
 
     <body>
@@ -30,11 +30,11 @@
                 </div>
                 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
             <div class="text-center head container-fluid"> 
-                <h4 >Edit Your Tops</h4>
+                <h4 >Your Tops</h4>
         </div>
         <div class="container-fluid">
             <div class="row d-flex justify-content-center margintop">
-                <div id="topChoice" class="col-lg-4 blackborder graybg">
+                <div id="topChoice" class="col-lg-4 styleddiv2">
                     <div id="carouselTops" class="carousel slide" data-ride="carousel" data-interval=false>
                         <div class="carousel-inner">
                             {% for top in tops %}
@@ -98,8 +98,8 @@
                 console.log("PAGE LOADED");
                 console.log("Active Top: ", document.getElementById("ctops_item1").getAttribute("data_top_id"));
                 data_top_id = document.getElementById("ctops_item1").getAttribute("data_top_id");
-                document.getElementById("edit_anchor").setAttribute("href", "edit/" + data_top_id);
-                document.getElementById("delete_anchor").setAttribute("href", "delete/" + data_top_id);
+                document.getElementById("edit_anchor").setAttribute("href", "edit_top/" + data_top_id);
+                document.getElementById("delete_anchor").setAttribute("href", "delete_top/" + data_top_id);
             });
 
             $(".carousel").on("touchstart", function(event){
