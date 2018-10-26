@@ -30,17 +30,23 @@
     </div>
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
         
-    <div class="row d-flex justify-content-center headspace">
-        <h4>Welcome to your ROTATION, {{ user }}!</h4>
-    </div>
-    <div class="container">
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-center headspace">
+            <h4>Welcome to your ROTATION</h4>
+        </div>
+        <div class="row d-flex justify-content-center ">
+            <h4>{{ user }}!</h4>
+        </div>
         <div class="row">
             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-1 d-none d-sm-block"></div>
             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-12 styleddiv">
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="row d-flex justify-content-center margintop">
-                            You have no combos scheduled for today.  Would you like to find a combo?
+                            <h6>You have no combos scheduled for today.</h6>
+                        </div>
+                        <div class="row d-flex justify-content-center ">
+                            <h6>Would you like to find a combo?</h6>
                         </div>     
                         <div class="row d-flex justify-content-center margintop">
                             <a href="get_lucky" class="btn btn-success btn-lg btn-block">I'm Feeling Lucky!</a>
