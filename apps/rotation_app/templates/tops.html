@@ -63,14 +63,14 @@
         <br>
         <div class="row text-center">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <a class="btn btn-info ">Edit Current Top</a>       
+                    <a href="edit_top/{{top.id}}" class="btn btn-info ">Edit Current Top</a>       
                     <!-- throw in the id right here -->
                 </div>            
         </div>
         <br>
         <div class="row text-center">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <a class="btn btn-danger">Delete Current Top</a>
+                <a href="delete/currentTopID" class="btn btn-danger">Delete Current Top</a>
             </div>            
         </div>
         <!-- Optional JavaScript -->
@@ -93,6 +93,11 @@
                 document.getElementById("mySidenav").style.width = "0";
             }
 
+            $(document).ready(function(){
+                data_top_id = document.getElementById("ctops_item1").getAttribute("data_top_id");
+                document.getElementById("currentTopID").setAttribute("value", data_top_id);
+            });
+
             $(".carousel").on("touchstart", function(event){
                 var xClick = event.originalEvent.touches[0].pageX;
                 $(this).one("touchmove", function(event){
@@ -107,7 +112,12 @@
                 $(".carousel").on("touchend", function(){
                         $(this).off("touchmove");
                 });
-            });  
+            }); 
+            $('#carouselTops').on('slid.bs.carousel', function (event) {
+                data_top_id = document.getElementById("ctops_item" + String(event.to + 1)).getAttribute("data_top_id");
+                $('#currentTopID').val(String(data_top_id));
+            });
+
         </script>
     </body>
 </html>
