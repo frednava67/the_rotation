@@ -30,10 +30,10 @@
             </div>
             <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 
-    <div class="row d-flex justify-content-center">
-        <h4>Today's Lucky Combo for {{ user }}</h4>
-    </div>
-    <div class="container">
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-center">
+            <h4>Today's Lucky Combo for {{ user }}</h4>
+        </div>
         <div class="row d-flex justify-content-center margintop">
             <div id="comboChoice" class="col-lg-4 styleddiv">
                 <img class="d-block w-100 fixedimgsize" src="{{ combo.top_chosen.imageURL }}" alt="{{ combo.top_chosen.name }}">

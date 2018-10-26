@@ -1,7 +1,18 @@
 body {
     background-color: antiquewhite;
 }
+.container-fluid{
+    width:95%;
+}
 
+h6{
+    font-size: 170%;
+    text-align: center;
+}
+
+.btn-block{
+    width: 92%;
+}
 img {
     object-fit: contain;
     max-width: 100%;
@@ -134,3 +145,4 @@ img {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
