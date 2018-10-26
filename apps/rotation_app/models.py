@@ -47,10 +47,13 @@ class ClothingManager(models.Manager):
         return bFlashMessage
     
     def db_check(request, postData):
-        check = Top.objects.filter(id = postData['textImageURL'])
+        bFlashMessage = False
+        check = Top.objects.filter(imageURL = postData.POST['textImageURL'])
         if len(check):
-            messages.error(newrequest, u"[You have already uploaded this image]", extra_tags="imageurl")
-        return messages
+            messages.error(postData, u"[You have already uploaded this image]", extra_tags="imageurl")
+            bFlashMessage = True
+
+        return bFlashMessage
 
 
 class ComboManager(models.Manager):

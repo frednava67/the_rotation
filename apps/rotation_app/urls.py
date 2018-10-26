@@ -22,5 +22,8 @@ urlpatterns = [
     url(r'^delete_top/(?P<id>\d+)$', views.delete_top),
     url(r'^delete_bottom/(?P<id>\d+)$', views.delete_bottom),
     url(r'^edit_top/(?P<id>\d+)$', views.edit_top),
+    url(r'^process_edit_top/(?P<id>\d+)$', views.process_edit_top),
     url(r'^edit_bottom/(?P<id>\d+)$', views.edit_bottom),
+    url(r'^process_edit_bottom/(?P<id>\d+)$', views.process_edit_bottom),
+
 ]
