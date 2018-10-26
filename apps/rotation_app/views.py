@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
-import re, bcrypt, datetime
+import re, bcrypt, datetime, random
 
 from .models import *
 
@@ -14,10 +14,7 @@ def getScheduledCombos(user_id):
     current_date = datetime.datetime.today()
     start = datetime.date.today()
     end = start + datetime.timedelta(days=1)
-#Model.objects.filter(datetime__range=(start, end))        <h5>Here is your scheduled combo for the day!</h5>
-
     retObj = Schedule.objects.filter(scheduled_by_id=user_id).all().filter(date_scheduled__range=(start, end))
-#    print(retObj.values())
     if retObj.count() == 0:
         return None
     else:
@@ -34,7 +31,6 @@ def index(request):
     user = User.objects.get(id=logged_in_user_id)
 
     scheduled_combos = getScheduledCombos(logged_in_user_id)
-    print(scheduled_combos.count())
 
     if scheduled_combos == None:
         context = {
@@ -336,6 +332,28 @@ def delete_combo(request):
         combo_to_delete.delete()
 
     return redirect('/browse_combos')
+
+def random_combo(request):
+    print("random_combo")
+
+    logged_in_user_id = request.session['user_id']
+    combos = Combo.objects.filter(created_by_id=logged_in_user_id)
+
+    if combos.count() == 0:
+        return redirect('browse_combos')
+
+    ceiling = combos.count()
+    lucky_number = random.randint(0,ceiling)
+    print(lucky_number)
+    combo = combos[lucky_number]
+    user = User.objects.get(id=logged_in_user_id)
+
+    context = {
+        "user": user,
+        "combo": combo,
+    }
+
+    return render(request, "random_combo.html", context)
 
 def logoff(request):
     print("logoff()")
