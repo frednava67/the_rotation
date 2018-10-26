@@ -17,6 +17,19 @@
 </head>
 
 <body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/">Home</a>
+        <a href="browse_combos">View Created Combos</a>        
+        <a href="create_combo">Create Some Combos</a>        
+        <a href="tops">View Tops</a>
+        <a href="add_top">Add A Top</a>
+        <a href="bottoms">View Bottoms</a>
+        <a href="add_bottom">Add A Bottom</a>
+        <a href="logoff">Logout</a>
+    </div>
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
     <div class="row d-flex justify-content-center ">
         <h5>Welcome to your ROTATION, {{ user }}!</h5>
     </div>
@@ -67,6 +80,20 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-</body>
+
+    <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+            }
+            
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            }
+    </script> 
+
+
+
+
+    </body>
 
 </html>
