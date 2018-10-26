@@ -343,7 +343,7 @@ def random_combo(request):
         return redirect('browse_combos')
 
     ceiling = combos.count()
-    lucky_number = random.randint(0,ceiling)
+    lucky_number = random.randint(0,ceiling-1)
     print(lucky_number)
     combo = combos[lucky_number]
     user = User.objects.get(id=logged_in_user_id)

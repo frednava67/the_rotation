@@ -63,43 +63,6 @@
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
         }
-
-        $(document).ready(function(){
-            console.log("PAGE LOADED");
-            console.log("Active Combo: ", document.getElementById("ccombos_item1").getAttribute("data_combo_id"));
-            data_combo_id = document.getElementById("ccombos_item1").getAttribute("data_combo_id");
-            console.log(data_combo_id)
-            document.getElementById('currentComboID').setAttribute("value", data_combo_id);
-            document.getElementById('deleteComboID1').setAttribute("value", data_combo_id);
-});
-
-        $(".carousel").on("touchstart", function(event){
-            var xClick = event.originalEvent.touches[0].pageX;
-            $(this).one("touchmove", function(event){
-                var xMove = event.originalEvent.touches[0].pageX;
-                if( Math.floor(xClick - xMove) > 5 ){
-                    $(this).carousel('next');
-                }
-                else if( Math.floor(xClick - xMove) < -5 ){
-                    $(this).carousel('prev');
-                }
-            });
-            $(".carousel").on("touchend", function(){
-                    $(this).off("touchmove");
-            });
-        });      
-
-        $('#carouselCombos').on('slid.bs.carousel', function (event) {
-            console.log("COMBOS SLIDE COMPLETED");
-            console.log("ccombos_item" + String(event.to + 1));
-            console.log(document.getElementById("ccombos_item" + String(event.to + 1)).getAttribute("data_combo_id"));
-            data_combo_id = document.getElementById("ccombos_item" + String(event.to + 1)).getAttribute("data_combo_id");
-            document.getElementById('currentComboID').setAttribute("value", data_combo_id);
-            document.getElementById('deleteComboID' + String(event.to + 1)).setAttribute("value", data_combo_id);
-        });
-
-
-
     </script>
     </body>
 </html>
